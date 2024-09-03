@@ -2,9 +2,11 @@ package com.studydevtegani.library_project.spring_boot_library_project.config;
 
 import com.studydevtegani.library_project.spring_boot_library_project.entities.Author;
 import com.studydevtegani.library_project.spring_boot_library_project.entities.Book;
+import com.studydevtegani.library_project.spring_boot_library_project.entities.Library;
 import com.studydevtegani.library_project.spring_boot_library_project.entities.enums.Category;
 import com.studydevtegani.library_project.spring_boot_library_project.repositories.AuthorRepository;
 import com.studydevtegani.library_project.spring_boot_library_project.repositories.BookRepository;
+import com.studydevtegani.library_project.spring_boot_library_project.repositories.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,10 @@ public class TestConfig implements CommandLineRunner {
 
    @Autowired
    private BookRepository bookRepository;
+
+   @Autowired
+   private LibraryRepository libraryRepository;
+
    @Override
    public void run(String... args) throws Exception {
 
@@ -43,5 +49,13 @@ public class TestConfig implements CommandLineRunner {
       author3.addBook(book5);
       this.authorRepository.saveAll(Arrays.asList(author1, author2, author3));
 
+      Library library = new Library(null, "Livraria do Ze");
+      this.libraryRepository.save(library);
+      library.addBook(book1);
+      library.addBook(book2);
+      library.addBook(book3);
+      library.addBook(book4);
+      library.addBook(book5);
+      this.libraryRepository.save(library);
    }
 }

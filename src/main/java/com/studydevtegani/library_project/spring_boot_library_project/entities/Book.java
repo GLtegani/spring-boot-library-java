@@ -30,6 +30,9 @@ public class Book implements Serializable {
    private Instant publishedDate;
    @EqualsAndHashCode.Include
    private Category category;
+   @ManyToOne
+   @JoinColumn(name = "library_id")
+   private Library library;
 
    public Book() {
    }
