@@ -1,6 +1,7 @@
 package com.studydevtegani.library_project.spring_boot_library_project.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -25,9 +26,10 @@ public class Author implements Serializable {
    private String name;
    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
    private Instant birthDate;
-//   @Setter(value = AccessLevel.NONE)
-//   @OneToMany
-//   private Set<Book> books = new HashSet<>();
+   @Setter(value = AccessLevel.NONE)
+   @OneToMany(mappedBy = "author")
+   @JsonIgnore
+   private Set<Book> books = new HashSet<>();
 
    public Author() {
    }
@@ -36,5 +38,9 @@ public class Author implements Serializable {
       this.id = id;
       this.name = name;
       this.birthDate = birthDate;
+   }
+
+   public final void addBook(Book book) {
+      this.getBooks().add(book);
    }
 }

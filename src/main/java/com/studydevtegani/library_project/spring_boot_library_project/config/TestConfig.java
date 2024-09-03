@@ -23,18 +23,25 @@ public class TestConfig implements CommandLineRunner {
    private BookRepository bookRepository;
    @Override
    public void run(String... args) throws Exception {
+
       Author author1 = new Author(null, "Pablo", Instant.now());
       Author author2 = new Author(null, "Gabriel", Instant.now());
       Author author3 = new Author(null, "Isabelle", Instant.now());
-
       this.authorRepository.saveAll(Arrays.asList(author1, author2, author3));
 
-//      Book book1 = new Book(null, author2, "Fighting", Instant.now(), Category.ACTION);
-//      Book book2 = new Book(null, author2, "Washing", Instant.now(), Category.FANTASY);
-//      Book book3 = new Book(null, author3, "Reading", Instant.now(), Category.ROMANCE);
-//      Book book4 = new Book(null, author1, "Living", Instant.now(), Category.ACTION);
-//      Book book5 = new Book(null, author3, "Light", Instant.now(), Category.FANTASY);
-//
-//      this.bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5));
+      Book book1 = new Book(null, author2, "Fighting", Instant.now(), Category.ACTION);
+      Book book2 = new Book(null, author2, "Washing", Instant.now(), Category.FANTASY);
+      Book book3 = new Book(null, author3, "Reading", Instant.now(), Category.ROMANCE);
+      Book book4 = new Book(null, author1, "Living", Instant.now(), Category.ACTION);
+      Book book5 = new Book(null, author3, "Light", Instant.now(), Category.FANTASY);
+      this.bookRepository.saveAll(Arrays.asList(book2, book3, book1, book4, book5));
+
+      author1.addBook(book4);
+      author2.addBook(book1);
+      author2.addBook(book2);
+      author3.addBook(book3);
+      author3.addBook(book5);
+      this.authorRepository.saveAll(Arrays.asList(author1, author2, author3));
+
    }
 }

@@ -20,7 +20,8 @@ public class Book implements Serializable {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @EqualsAndHashCode.Include
    private Long id;
-   @OneToOne
+   @ManyToOne
+   @JoinColumn(name = "author_id")
    @EqualsAndHashCode.Include
    private Author author;
    @EqualsAndHashCode.Include
