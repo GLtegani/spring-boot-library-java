@@ -56,6 +56,13 @@ public class TestConfig implements CommandLineRunner {
       library.addBook(book3);
       library.addBook(book4);
       library.addBook(book5);
+      book1.setLibrary(library);
+      book2.setLibrary(library);
+      book3.setLibrary(library);
+      book4.setLibrary(library);
+      book5.setLibrary(library);
+
       this.libraryRepository.save(library);
+      this.bookRepository.saveAll(Arrays.asList(book2, book3, book1, book4, book5));
    }
 }
